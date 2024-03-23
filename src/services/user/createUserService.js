@@ -6,13 +6,13 @@ const createUserService = async (req) => {
     let postBody = req.body;
 
     // Extract the password from the postBody
-    let password = postBody.password;
+    // let password = postBody.password;
 
     // Hash the password synchronously
-    let hashedPassword = bcryptjs.hashSync(password, 10);
+    // let hashedPassword = bcryptjs.hashSync(password, 10);
 
     // Replace the plaintext password with the hashed password
-    postBody.password = hashedPassword;
+    // postBody.password = hashedPassword;
 
     // Create user with hashed password
     let data = await userModel.create(postBody);
