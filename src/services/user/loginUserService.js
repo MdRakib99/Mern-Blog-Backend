@@ -11,6 +11,7 @@ const loginUserService = async (req) => {
         _id: 0,
         email: 1,
         username: 1,
+        photo: 1,
       },
     };
     let data = await userModel.aggregate([matchStage, projectionStage]);
