@@ -34,10 +34,7 @@ app.use(limiter);
 
 async function main() {
   await mongoose.connect(
-    `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster0.eq5zxrj.mongodb.net/MernBlog
-
-
-    `
+    `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster0.eq5zxrj.mongodb.net/MernBlog`
   );
   console.log("Database Connected");
 }
@@ -60,7 +57,7 @@ main().catch((err) => console.log(err));
 app.use("/api/v1", router);
 
 app.use("*", (req, res) => {
-  res.status(200).json({ status: "success", data: "Backend Running" });
+  res.status(200).json({ status: "fail", data: "Data not found" });
 });
 
 module.exports = app;
