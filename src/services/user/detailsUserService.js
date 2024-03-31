@@ -3,13 +3,16 @@ const userModel = require("../../models/users/userModel");
 const detailsUserService = async (req) => {
   try {
     let email = req.headers["email"];
+    let isAdmin = req.headers["isAdmin"];
+
     let matchStage = {
-      $match: { email: email },
+      $match: { email: email, isAdmin: isAdmin },
     };
     let projectStage = {
       $project: {
         _id: 1,
         email: 1,
+        isAdmin: 1,
         username: 1,
 
         photo: 1,

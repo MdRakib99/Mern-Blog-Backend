@@ -7,7 +7,10 @@ module.exports = (req, res, next) => {
     if (err) {
       res.status(401).json({ status: "unauthorize" });
     } else {
-      let email = decoded["data"];
+      let email = decoded["data"]["email"];
+      let isAdmin = decoded["data"]["isAdmin"];
+      req.headers.isAdmin = isAdmin;
+      console.log(isAdmin, email);
 
       req.headers.email = email;
       next();

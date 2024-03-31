@@ -10,16 +10,24 @@ const loginUserService = async (req) => {
       $project: {
         _id: 0,
         email: 1,
+        isAdmin: 1,
         username: 1,
+
         photo: 1,
       },
     };
     let data = await userModel.aggregate([matchStage, projectionStage]);
 
     if (data.length > 0) {
-      let token = await createToken(data[0]["email"]);
+      const userData = data[0];
 
-      return { status: "success", token: token, data: data[0] };
+      const payload = {
+        email: userData.email,
+        isAdmin: userData.isAdmin,
+      };
+      let token = await createToken(payload);
+
+      return { status: "success", token: token, data: userData };
     } else {
       return { status: "fail", data: "unauthorize" };
     }
