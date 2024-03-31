@@ -10,9 +10,8 @@ module.exports = (req, res, next) => {
       let email = decoded["data"]["email"];
       let isAdmin = decoded["data"]["isAdmin"];
       req.headers.isAdmin = isAdmin;
-      console.log(isAdmin, email);
-
       req.headers.email = email;
+
       next();
     }
   });
