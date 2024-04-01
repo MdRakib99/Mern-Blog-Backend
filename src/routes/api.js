@@ -7,6 +7,7 @@ const {
   profileDetails,
 } = require("../controllers/userController");
 const authVerifyMiddleware = require("../middleware/authVerifyMiddleware");
+const { createPost } = require("../controllers/postController");
 
 const router = express.Router();
 
@@ -18,5 +19,9 @@ router.post("/sign-up", registration);
 router.post("/login", login);
 router.post("/updateProfile", authVerifyMiddleware, updateProfile);
 router.get("/profileDetails", authVerifyMiddleware, profileDetails);
+
+//Post
+
+router.post("/create-post", authVerifyMiddleware, createPost);
 
 module.exports = router;
