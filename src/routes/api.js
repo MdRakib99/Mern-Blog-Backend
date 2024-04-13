@@ -8,6 +8,7 @@ const {
 } = require("../controllers/userController");
 const authVerifyMiddleware = require("../middleware/authVerifyMiddleware");
 const { createPost } = require("../controllers/postController");
+const { upload } = require("../middleware/multerMiddleware");
 
 const router = express.Router();
 
@@ -15,6 +16,7 @@ const router = express.Router();
 router.get("/test", test);
 
 //User
+
 router.post("/sign-up", registration);
 router.post("/login", login);
 router.post("/updateProfile", authVerifyMiddleware, updateProfile);
@@ -22,6 +24,11 @@ router.get("/profileDetails", authVerifyMiddleware, profileDetails);
 
 //Post
 
-router.post("/create-post", authVerifyMiddleware, createPost);
+router.post(
+  "/create-post",
+  authVerifyMiddleware,
+  upload.fields([{ name: "image", maxCount: 1 }]),
+  createPost
+);
 
 module.exports = router;
