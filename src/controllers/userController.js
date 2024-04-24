@@ -1,5 +1,6 @@
 const createUserService = require("../services/user/createUserService");
 const detailsUserService = require("../services/user/detailsUserService");
+const getUsersService = require("../services/user/getUsersService");
 const loginUserService = require("../services/user/loginUserService");
 const updateUserService = require("../services/user/updateUserService");
 
@@ -24,5 +25,10 @@ exports.updateProfile = async (req, res) => {
 
 exports.profileDetails = async (req, res) => {
   let result = await detailsUserService(req);
+  res.status(200).json(result);
+};
+
+exports.getUsers = async (req, res) => {
+  let result = await getUsersService(req);
   res.status(200).json(result);
 };

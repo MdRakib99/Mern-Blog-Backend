@@ -5,6 +5,7 @@ const {
   login,
   updateProfile,
   profileDetails,
+  getUsers,
 } = require("../controllers/userController");
 const authVerifyMiddleware = require("../middleware/authVerifyMiddleware");
 const {
@@ -12,6 +13,7 @@ const {
   postsList,
   deletePost,
   getPost,
+  updatePost,
 } = require("../controllers/postController");
 const { upload } = require("../middleware/multerMiddleware");
 
@@ -26,6 +28,7 @@ router.post("/sign-up", registration);
 router.post("/login", login);
 router.post("/updateProfile", authVerifyMiddleware, updateProfile);
 router.get("/profileDetails", authVerifyMiddleware, profileDetails);
+router.get("/get-users", authVerifyMiddleware, getUsers);
 
 //Post
 
@@ -44,5 +47,13 @@ router.delete("/delete-post/:id", authVerifyMiddleware, deletePost);
 //Get Post
 
 router.get("/get-post/:id", authVerifyMiddleware, getPost);
+//Update Post
+
+router.post(
+  "/update-post/:id",
+  authVerifyMiddleware,
+  upload.fields([{ name: "image", maxCount: 1 }]),
+  updatePost
+);
 
 module.exports = router;
