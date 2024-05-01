@@ -14,6 +14,7 @@ const {
   deletePost,
   getPost,
   updatePost,
+  postsListAll,
 } = require("../controllers/postController");
 const { upload } = require("../middleware/multerMiddleware");
 
@@ -40,6 +41,7 @@ router.post(
 );
 // Posts List
 router.get("/posts-list", authVerifyMiddleware, postsList);
+router.get("/posts-list-all", postsListAll);
 
 //DeletePost
 

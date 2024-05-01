@@ -1,3 +1,4 @@
+const allPostsListService = require("../services/post/allPostsListService");
 const createPostService = require("../services/post/createPostService");
 const deletePostService = require("../services/post/deletePostService");
 const getPostService = require("../services/post/getPostService");
@@ -22,6 +23,13 @@ exports.postsList = async (req, res) => {
     res.status(404).json(result);
   }
 };
+
+exports.postsListAll = async (req, res) => {
+  let result = await allPostsListService(req);
+
+  res.status(200).json(result);
+};
+
 exports.getPost = async (req, res) => {
   let result = await getPostService(req);
   if (result.status === "success") {
@@ -39,6 +47,7 @@ exports.deletePost = async (req, res) => {
     res.status(404).json(result);
   }
 };
+
 exports.updatePost = async (req, res) => {
   let result = await updatePostService(req);
   if (result.status === "success") {
