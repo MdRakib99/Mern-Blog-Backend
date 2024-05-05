@@ -1,4 +1,5 @@
 const createUserService = require("../services/user/createUserService");
+const deleteUsersService = require("../services/user/deleteUsersService");
 const detailsUserService = require("../services/user/detailsUserService");
 const getUsersService = require("../services/user/getUsersService");
 const loginUserService = require("../services/user/loginUserService");
@@ -31,4 +32,13 @@ exports.profileDetails = async (req, res) => {
 exports.getUsers = async (req, res) => {
   let result = await getUsersService(req);
   res.status(200).json(result);
+};
+
+exports.deleteUser = async (req, res) => {
+  let result = await deleteUsersService(req);
+  if (result.status === "success") {
+    res.status(200).json(result);
+  } else {
+    res.status(404).json(result);
+  }
 };

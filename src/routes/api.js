@@ -6,6 +6,7 @@ const {
   updateProfile,
   profileDetails,
   getUsers,
+  deleteUser,
 } = require("../controllers/userController");
 const authVerifyMiddleware = require("../middleware/authVerifyMiddleware");
 const {
@@ -30,6 +31,7 @@ router.post("/login", login);
 router.post("/updateProfile", authVerifyMiddleware, updateProfile);
 router.get("/profileDetails", authVerifyMiddleware, profileDetails);
 router.get("/get-users", authVerifyMiddleware, getUsers);
+router.delete("/delete-user/:id", authVerifyMiddleware, deleteUser);
 
 //Post
 
