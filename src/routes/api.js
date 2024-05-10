@@ -50,7 +50,7 @@ router.get("/posts-list-all", postsListAll);
 router.delete("/delete-post/:id", authVerifyMiddleware, deletePost);
 //Get Post
 
-router.get("/get-post/:id", authVerifyMiddleware, getPost);
+router.get("/get-post/:identifier", authVerifyMiddleware, getPost);
 //Update Post
 
 router.post(
