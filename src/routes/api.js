@@ -7,6 +7,7 @@ const {
   profileDetails,
   getUsers,
   deleteUser,
+  getUsersForAll,
 } = require("../controllers/userController");
 const authVerifyMiddleware = require("../middleware/authVerifyMiddleware");
 const {
@@ -18,6 +19,10 @@ const {
   postsListAll,
 } = require("../controllers/postController");
 const { upload } = require("../middleware/multerMiddleware");
+const {
+  createComment,
+  getComment,
+} = require("../controllers/commentController");
 
 const router = express.Router();
 
@@ -31,6 +36,7 @@ router.post("/login", login);
 router.post("/updateProfile", authVerifyMiddleware, updateProfile);
 router.get("/profileDetails", authVerifyMiddleware, profileDetails);
 router.get("/get-users", authVerifyMiddleware, getUsers);
+router.get("/get-users-all/:email", getUsersForAll);
 router.delete("/delete-user/:id", authVerifyMiddleware, deleteUser);
 
 //Post
@@ -41,17 +47,13 @@ router.post(
   upload.fields([{ name: "image", maxCount: 1 }]),
   createPost
 );
-// Posts List
+
 router.get("/posts-list", authVerifyMiddleware, postsList);
 router.get("/posts-list-all", postsListAll);
 
-//DeletePost
-
 router.delete("/delete-post/:id", authVerifyMiddleware, deletePost);
-//Get Post
 
 router.get("/get-post/:identifier", authVerifyMiddleware, getPost);
-//Update Post
 
 router.post(
   "/update-post/:id",
@@ -60,4 +62,7 @@ router.post(
   updatePost
 );
 
+//Comment
+router.post("/create-comment", authVerifyMiddleware, createComment);
+router.get("/get-comment/:postId", getComment);
 module.exports = router;
