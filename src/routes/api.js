@@ -22,6 +22,7 @@ const { upload } = require("../middleware/multerMiddleware");
 const {
   createComment,
   getComment,
+  likeComment,
 } = require("../controllers/commentController");
 
 const router = express.Router();
@@ -65,4 +66,5 @@ router.post(
 //Comment
 router.post("/create-comment", authVerifyMiddleware, createComment);
 router.get("/get-comment/:postId", getComment);
+router.get("/likeComment/:commentId", authVerifyMiddleware, likeComment);
 module.exports = router;
